@@ -15,7 +15,7 @@
                 </span>
             </p>
         </div>
-        <button type="button" class="button button--validate" data-twrc-button>Clear site cache</button>
+        <button type="button" class="twrc__button" data-twrc-button>Clear site cache</button>
     </div>
 </template>
 
@@ -34,7 +34,37 @@
     .twrc__title { font-weight: 600; margin: 0 0 4px; }
     .twrc__meta { color: #8c8c8c; margin: 0; }
     .twrc__meta strong { color: #e61414; font-weight: 600; margin-right: 4px; }
-    .twrc .button[disabled] { opacity: .6; cursor: wait; }
+    /* Mirrors Twill's .button.button--validate - Twill scopes those styles to
+       its Vue components, so they can't be reused from plain markup. */
+    .twrc__button {
+        -webkit-appearance: none;
+        appearance: none;
+        flex-shrink: 0;
+        display: inline-block;
+        height: 40px;
+        margin: 0;
+        padding: 0 30px;
+        border: 0 none;
+        border-radius: 2px;
+        background: #1d9f3c;
+        color: #fff;
+        font: inherit;
+        font-size: 1em;
+        letter-spacing: inherit;
+        line-height: 38px;
+        text-align: center;
+        white-space: nowrap;
+        cursor: pointer;
+        outline: none;
+        transition: color .2s linear, background-color .2s linear;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .twrc__button:hover,
+    .twrc__button:focus { background: #1a8f36; }
+    .twrc__button:focus-visible { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1d9f3c; }
+    .twrc__button:active { background: #16792e; }
+    .twrc__button:disabled { background: #e5e5e5; color: #a6a6a6; cursor: default; pointer-events: none; }
     @media (max-width: 600px) {
         .twrc { flex-direction: column; align-items: flex-start; }
     }
@@ -78,8 +108,9 @@
                     })
                     .then(function (data) {
                         status.textContent = 'Last cleared just now' + (data.cleared_by ? ' by ' + data.cleared_by : '') + '.';
+                        button.disabled = false;
                         button.textContent = 'Cache cleared ✓';
-                        setTimeout(function () { button.textContent = label; button.disabled = false; }, 2500);
+                        setTimeout(function () { button.textContent = label; }, 2500);
                     })
                     .catch(function (error) {
                         status.textContent = error.message === '403'
