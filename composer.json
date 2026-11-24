@@ -1,0 +1,33 @@
+{
+    "name": "stevenbrown-85/twill-responsecache",
+    "description": "Full-page frontend caching for Twill CMS 3 sites, built on spatie/laravel-responsecache: automatic invalidation on CMS changes, configurable exclusions and a clear-cache button on the Twill dashboard.",
+    "keywords": ["twill", "twillcms", "cache", "responsecache", "cms"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Steven Brown",
+            "homepage": "https://github.com/stevenbrown-85"
+        }
+    ],
+    "homepage": "https://github.com/stevenbrown-85/twill-responsecache",
+    "require": {
+        "php": "^8.2",
+        "area17/twill": "^3.0",
+        "spatie/laravel-responsecache": "^7.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "StevenBrown85\\TwillResponseCache\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "StevenBrown85\\TwillResponseCache\\TwillResponseCacheServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
